@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pentest Recon Tool</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<header>
+  <h1>Pentest Recon</h1>
+  <span id="version">v1.0.0</span>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Novo scan</h2>
+    <form id="scan-form">
+      <label>
+        <span>URL alvo</span>
+        <input type="text" id="url" placeholder="https://exemplo.com" required autocomplete="off" />
+      </label>
+
+      <div class="row">
+        <label>
+          <span>Tipo</span>
+          <select id="scan_type">
+            <option value="quick">Rápido (headers, TLS, custom)</option>
+            <option value="full" selected>Completo (todos os scanners)</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Wordlist (ffuf)</span>
+          <select id="wordlist">
+            <option value="">— padrão —</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="upload">
+          <span>Upload wordlist</span>
+          <input type="file" id="wordlist-upload" accept=".txt,.list" />
+        </label>
+        <button type="submit" id="run-btn">Executar scan</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card hidden" id="status-card">
+    <h2>Status</h2>
+    <p id="status-line">Aguardando…</p>
+    <p id="score-line"></p>
+  </section>
+
+  <section class="card hidden" id="output-card">
+    <div class="hdr">
+      <h2>Saída (copy/paste friendly)</h2>
+      <button type="button" id="copy-all">Copiar tudo</button>
+    </div>
+    <pre id="terminal-output" class="terminal"></pre>
+
+    <div id="sections"></div>
+  </section>
+</main>
+
+<template id="section-template">
+  <div class="section">
+    <div class="hdr">
+      <h3 class="title"></h3>
+      <button type="button" class="copy-btn">Copiar</button>
+    </div>
+    <pre class="body"></pre>
+  </div>
+</template>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
